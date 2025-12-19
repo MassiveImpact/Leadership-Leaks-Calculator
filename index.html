@@ -1,348 +1,153 @@
-import React, { useState } from 'react';
-import { TrendingDown, DollarSign, Users, MessageSquare, Target, Shield, Clock } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadership Leaks Calculator</title>
+  <style>
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      margin: 0;
+      padding: 2rem;
+      color: #0e2c56;
+    }
+    h1, h2, h3 { margin: 0 0 0.5rem 0; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section { background: white; border-radius: 12px; padding: 1rem 2rem; margin-bottom: 1.5rem; border-left: 6px solid; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .section h3 { margin-bottom: 0.5rem; }
+    .section p { margin-bottom: 0.5rem; font-size: 0.9rem; opacity: 0.8; }
+    label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    input[type=number] { width: 100%; padding: 0.4rem; margin-top: 0.2rem; border: 2px solid #00a6cb; border-radius: 6px; }
+    .total { background: white; border-radius: 16px; padding: 1.5rem 2rem; border: 4px solid #0e2c56; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom:2rem; }
+    .total span { font-size: 2.5rem; color: #ff6d7b; font-weight: bold; display:block; margin-top:0.5rem; }
+  </style>
+</head>
+<body>
 
-export default function LeadershipCostCalculator() {
-  const [meeting, setMeeting] = useState({
-    perWeek: 0,
-    hoursWasted: 0,
-    leaderCost: 0,
-    numLeaders: 0,
-    teamMemberCost: 0,
-    numTeamMembers: 0
-  });
+<div class="container">
+  <h1 style="text-align:center; margin-bottom:1rem;">Leadership Leaks™ Calculator</h1>
+  <p style="text-align:center; max-width:700px; margin:0 auto 2rem auto; opacity:0.85;">
+    Time and trust are your organization's most valuable currencies. Leadership leaks are hidden drains with measurable costs that compound daily. The question is not whether your organization has these leaks, but how much they are costing you right now.
+  </p>
 
-  const [turnover, setTurnover] = useState({
-    employeesLost: 0,
-    replacementCost: 0
-  });
+  <!-- Meeting Inefficiency -->
+  <div class="section" style="border-left-color:#00a6cb;">
+    <h3>Meeting Inefficiency</h3>
+    <p>Unclear agendas, off-topic discussions, decision paralysis, and redundant follow-ups drain resources.</p>
+    <label>Meetings per week: <input type="number" id="meetingsPerWeek" value="0" step="1"></label>
+    <label>Hours wasted per meeting: <input type="number" id="hoursWasted" value="0" step="0.1"></label>
+    <label>Leader hourly cost: $<input type="number" id="leaderCost" value="0" step="1"></label>
+    <label>Number of leaders: <input type="number" id="numLeaders" value="0" step="1"></label>
+    <label>Team member hourly cost: $<input type="number" id="teamMemberCost" value="0" step="1"></label>
+    <label>Team members per meeting: <input type="number" id="numTeamMembers" value="0" step="1"></label>
+  </div>
 
-  const [communication, setCommunication] = useState({
-    perWeek: 0,
-    costPer: 0
-  });
+  <!-- Turnover Costs -->
+  <div class="section" style="border-left-color:#ff6d7b;">
+    <h3>Turnover Costs</h3>
+    <p>People do not quit jobs, they quit managers. Poor leadership creates toxic cultures and burnout.</p>
+    <label>Employees lost annually: <input type="number" id="employeesLost" value="0" step="1"></label>
+    <label>Cost to replace one employee: $<input type="number" id="replacementCost" value="0" step="1"></label>
+  </div>
 
-  const [opportunities, setOpportunities] = useState({
-    perWeek: 0,
-    revenuePerOpportunity: 0
-  });
+  <!-- Communication Breakdowns -->
+  <div class="section" style="border-left-color:#e2c451;">
+    <h3>Communication Breakdowns</h3>
+    <p>Unclear instructions, rework, duplicate efforts, and emergency "alignment" meetings add up fast.</p>
+    <label>Miscommunications per week: <input type="number" id="miscommunicationsPerWeek" value="0" step="1"></label>
+    <label>Cost per miscommunication: $<input type="number" id="costPerMiscommunication" value="0" step="1"></label>
+  </div>
 
-  const [trust, setTrust] = useState({
-    incidentsPerMonth: 0,
-    productivityLoss: 0,
-    employeesAffected: 0,
-    weeksToRecover: 0,
-    avgWage: 0
-  });
+  <!-- Missed Opportunities -->
+  <div class="section" style="border-left-color:#00a6cb;">
+    <h3>Missed Opportunities</h3>
+    <p>Strategic partnerships ignored, innovations dismissed, and market windows missed due to poor leadership.</p>
+    <label>Missed opportunities per week: <input type="number" id="missedOpportunities" value="0" step="1"></label>
+    <label>Revenue per missed opportunity: $<input type="number" id="revenuePerOpportunity" value="0" step="1"></label>
+  </div>
 
-  const [timeDrain, setTimeDrain] = useState({
-    drainsPerWeek: 0,
-    hoursPerDrain: 0,
-    peopleImpacted: 0,
-    avgRate: 0
-  });
+  <!-- Trust Erosion -->
+  <div class="section" style="border-left-color:#ff6d7b;">
+    <h3>Trust Erosion</h3>
+    <p>Broken promises, favoritism, and micromanaging cause people to second-guess, withhold ideas, and cover their backs.</p>
+    <label>Trust-breaking incidents per month: <input type="number" id="trustIncidents" value="0" step="1"></label>
+    <label>Productivity loss per incident (%): <input type="number" id="productivityLoss" value="0" step="1"></label>
+    <label>Employees affected per incident: <input type="number" id="employeesAffected" value="0" step="1"></label>
+    <label>Weeks to recover trust: <input type="number" id="weeksToRecover" value="0" step="1"></label>
+    <label>Average employee hourly wage: $<input type="number" id="avgWage" value="0" step="1"></label>
+  </div>
 
-  // Calculations
-  const meetingCost = meeting.perWeek * 52 * meeting.hoursWasted * 
-    (meeting.leaderCost * meeting.numLeaders + meeting.teamMemberCost * meeting.numTeamMembers);
+  <!-- Time Drain -->
+  <div class="section" style="border-left-color:#e2c451;">
+    <h3>Time Drain</h3>
+    <p>Unclear priorities, last-minute changes, redundant approvals, and decision bottlenecks steal productive time.</p>
+    <label>Major time drains per week: <input type="number" id="drainsPerWeek" value="0" step="1"></label>
+    <label>Hours lost per drain: <input type="number" id="hoursPerDrain" value="0" step="0.1"></label>
+    <label>People impacted per drain: <input type="number" id="peopleImpacted" value="0" step="1"></label>
+    <label>Average hourly rate: $<input type="number" id="avgRate" value="0" step="1"></label>
+  </div>
 
-  const turnoverCost = turnover.employeesLost * turnover.replacementCost;
+  <!-- Calculate Button -->
+  <div style="text-align:center; margin-bottom:2rem;">
+    <button onclick="calculateTotal()" style="padding:0.7rem 1.5rem; font-size:1rem; background:#00a6cb; color:white; border:none; border-radius:6px; cursor:pointer;">
+      Calculate Total Cost
+    </button>
+  </div>
 
-  const commCost = communication.perWeek * 52 * communication.costPer;
+  <!-- Total Cost -->
+  <div class="total">
+    <h2>Annual Cost of Leadership Leaks</h2>
+    <span id="totalCost">$0</span>
+  </div>
+</div>
 
-  const opportunityCost = opportunities.perWeek * 52 * opportunities.revenuePerOpportunity;
+<script>
+  function calculateTotal() {
+    // Meeting
+    const meetingsPerWeek = parseFloat(document.getElementById('meetingsPerWeek').value) || 0;
+    const hoursWasted = parseFloat(document.getElementById('hoursWasted').value) || 0;
+    const leaderCost = parseFloat(document.getElementById('leaderCost').value) || 0;
+    const numLeaders = parseFloat(document.getElementById('numLeaders').value) || 0;
+    const teamMemberCost = parseFloat(document.getElementById('teamMemberCost').value) || 0;
+    const numTeamMembers = parseFloat(document.getElementById('numTeamMembers').value) || 0;
+    const meetingCost = meetingsPerWeek * 52 * hoursWasted * (leaderCost * numLeaders + teamMemberCost * numTeamMembers);
 
-  const trustCost = trust.incidentsPerMonth * 12 * 
-    (trust.productivityLoss / 100) * trust.employeesAffected * 
-    trust.weeksToRecover * 40 * trust.avgWage;
+    // Turnover
+    const employeesLost = parseFloat(document.getElementById('employeesLost').value) || 0;
+    const replacementCost = parseFloat(document.getElementById('replacementCost').value) || 0;
+    const turnoverCost = employeesLost * replacementCost;
 
-  const timeDrainCost = timeDrain.drainsPerWeek * 52 * 
-    timeDrain.hoursPerDrain * timeDrain.peopleImpacted * timeDrain.avgRate;
+    // Communication
+    const misPerWeek = parseFloat(document.getElementById('miscommunicationsPerWeek').value) || 0;
+    const costPerMis = parseFloat(document.getElementById('costPerMiscommunication').value) || 0;
+    const commCost = misPerWeek * 52 * costPerMis;
 
-  const totalCost = meetingCost + turnoverCost + commCost + opportunityCost + trustCost + timeDrainCost;
+    // Opportunities
+    const oppPerWeek = parseFloat(document.getElementById('missedOpportunities').value) || 0;
+    const revenuePerOpp = parseFloat(document.getElementById('revenuePerOpportunity').value) || 0;
+    const opportunityCost = oppPerWeek * 52 * revenuePerOpp;
 
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(value);
-  };
+    // Trust
+    const incidents = parseFloat(document.getElementById('trustIncidents').value) || 0;
+    const productivityLoss = parseFloat(document.getElementById('productivityLoss').value) || 0;
+    const employeesAffected = parseFloat(document.getElementById('employeesAffected').value) || 0;
+    const weeksToRecover = parseFloat(document.getElementById('weeksToRecover').value) || 0;
+    const avgWage = parseFloat(document.getElementById('avgWage').value) || 0;
+    const trustCost = incidents * 12 * (productivityLoss/100) * employeesAffected * weeksToRecover * 40 * avgWage;
 
-  const InputField = ({ label, value, onChange, prefix = '', suffix = '', step = 1 }) => (
-    <div className="mb-4">
-      <label className="block text-sm font-medium mb-2" style={{ color: '#0e2c56' }}>
-        {label}
-      </label>
-      <div className="relative">
-        {prefix && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">{prefix}</span>}
-        <input
-          type="number"
-          value={value}
-          onChange={onChange}
-          step={step}
-          className="w-full px-3 py-2 border-2 rounded-lg focus:outline-none focus:border-blue-400 transition-colors"
-          style={{ paddingLeft: prefix ? '2rem' : '0.75rem', borderColor: '#00a6cb' }}
-        />
-        {suffix && <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">{suffix}</span>}
-      </div>
-    </div>
-  );
+    // Time Drain
+    const drainsPerWeek = parseFloat(document.getElementById('drainsPerWeek').value) || 0;
+    const hoursPerDrain = parseFloat(document.getElementById('hoursPerDrain').value) || 0;
+    const peopleImpacted = parseFloat(document.getElementById('peopleImpacted').value) || 0;
+    const avgRate = parseFloat(document.getElementById('avgRate').value) || 0;
+    const timeDrainCost = drainsPerWeek * 52 * hoursPerDrain * peopleImpacted * avgRate;
 
-  const CostCard = ({ icon: Icon, title, amount, color, children }) => (
-    <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 transform transition-all hover:scale-105 hover:shadow-xl" 
-         style={{ borderLeftColor: color }}>
-      <div className="flex items-center gap-3 mb-4">
-        <div className="p-3 rounded-lg" style={{ backgroundColor: `${color}20` }}>
-          <Icon size={24} style={{ color }} />
-        </div>
-        <h3 className="font-bold text-lg" style={{ color: '#0e2c56' }}>{title}</h3>
-      </div>
-      <div className="space-y-3 mb-6">
-        {children}
-      </div>
-      <div className="pt-4 border-t-2" style={{ borderColor: `${color}40` }}>
-        <div className="flex justify-between items-center">
-          <span className="text-sm font-semibold" style={{ color: '#0e2c56' }}>Annual Cost:</span>
-          <span className="text-2xl font-bold" style={{ color }}>{formatCurrency(amount)}</span>
-        </div>
-      </div>
-    </div>
-  );
+    const totalCost = meetingCost + turnoverCost + commCost + opportunityCost + trustCost + timeDrainCost;
 
-  return (
-    <div className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}>
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold mb-4" style={{ 
-            color: '#0e2c56',
-            fontFamily: '"Inter", "Segoe UI", system-ui, sans-serif',
-            letterSpacing: '-0.02em'
-          }}>
-            Leadership Leaks™ Calculator
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#0e2c56', opacity: 0.85 }}>
-            Time and trust are your organization's most valuable currencies. Leadership leaks are hidden drains with 
-            measurable costs that compound daily. The question is not whether your organization has these leaks, 
-            but how much they are costing you right now.
-          </p>
-        </div>
+    document.getElementById('totalCost').innerText = totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits:0 });
+  }
+</script>
 
-        {/* Input Sections */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {/* Meeting Inefficiency */}
-          <CostCard icon={Users} title="Meeting Inefficiency" amount={meetingCost} color="#00a6cb">
-            <p className="text-sm mb-4" style={{ color: '#0e2c56', opacity: 0.8 }}>
-              Unclear agendas, off-topic discussions, decision paralysis, and redundant follow-ups drain resources.
-            </p>
-            <InputField
-              label="Meetings per week"
-              value={meeting.perWeek}
-              onChange={(e) => setMeeting({...meeting, perWeek: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Hours wasted per meeting"
-              value={meeting.hoursWasted}
-              onChange={(e) => setMeeting({...meeting, hoursWasted: parseFloat(e.target.value) || 0})}
-              step={0.1}
-              suffix="hrs"
-            />
-            <InputField
-              label="Leader hourly cost"
-              value={meeting.leaderCost}
-              onChange={(e) => setMeeting({...meeting, leaderCost: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-            <InputField
-              label="Number of leaders present"
-              value={meeting.numLeaders}
-              onChange={(e) => setMeeting({...meeting, numLeaders: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Team member hourly cost"
-              value={meeting.teamMemberCost}
-              onChange={(e) => setMeeting({...meeting, teamMemberCost: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-            <InputField
-              label="Team members per meeting"
-              value={meeting.numTeamMembers}
-              onChange={(e) => setMeeting({...meeting, numTeamMembers: parseFloat(e.target.value) || 0})}
-            />
-          </CostCard>
-
-          {/* Turnover Costs */}
-          <CostCard icon={TrendingDown} title="Turnover Costs" amount={turnoverCost} color="#ff6d7b">
-            <p className="text-sm mb-4" style={{ color: '#0e2c56', opacity: 0.8 }}>
-              People do not quit jobs, they quit managers. Poor leadership creates toxic cultures and burnout.
-            </p>
-            <InputField
-              label="Employees lost annually"
-              value={turnover.employeesLost}
-              onChange={(e) => setTurnover({...turnover, employeesLost: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Cost to replace one employee"
-              value={turnover.replacementCost}
-              onChange={(e) => setTurnover({...turnover, replacementCost: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-            <div className="mt-4 p-3 rounded-lg" style={{ backgroundColor: '#ff6d7b20' }}>
-              <p className="text-xs font-medium" style={{ color: '#0e2c56' }}>
-                Industry average: 50-200% of annual salary per replacement
-              </p>
-            </div>
-          </CostCard>
-
-          {/* Communication Costs */}
-          <CostCard icon={MessageSquare} title="Communication Breakdowns" amount={commCost} color="#e2c451">
-            <p className="text-sm mb-4" style={{ color: '#0e2c56', opacity: 0.8 }}>
-              Unclear instructions, rework, duplicate efforts, and emergency "alignment" meetings add up fast.
-            </p>
-            <InputField
-              label="Miscommunications per week"
-              value={communication.perWeek}
-              onChange={(e) => setCommunication({...communication, perWeek: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Cost per miscommunication"
-              value={communication.costPer}
-              onChange={(e) => setCommunication({...communication, costPer: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-          </CostCard>
-
-          {/* Missed Opportunities */}
-          <CostCard icon={Target} title="Missed Opportunities" amount={opportunityCost} color="#00a6cb">
-            <p className="text-sm mb-4" style={{ color: '#0e2c56', opacity: 0.8 }}>
-              Strategic partnerships ignored, innovations dismissed, and market windows missed due to poor leadership.
-            </p>
-            <InputField
-              label="Missed opportunities per week"
-              value={opportunities.perWeek}
-              onChange={(e) => setOpportunities({...opportunities, perWeek: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Revenue per missed opportunity"
-              value={opportunities.revenuePerOpportunity}
-              onChange={(e) => setOpportunities({...opportunities, revenuePerOpportunity: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-          </CostCard>
-
-          {/* Trust Erosion */}
-          <CostCard icon={Shield} title="Trust Erosion" amount={trustCost} color="#ff6d7b">
-            <p className="text-sm mb-4" style={{ color: '#0e2c56', opacity: 0.8 }}>
-              Broken promises, favoritism, and micromanaging cause people to second-guess, withhold ideas, and cover their backs.
-            </p>
-            <InputField
-              label="Trust-breaking incidents per month"
-              value={trust.incidentsPerMonth}
-              onChange={(e) => setTrust({...trust, incidentsPerMonth: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Productivity loss per incident"
-              value={trust.productivityLoss}
-              onChange={(e) => setTrust({...trust, productivityLoss: parseFloat(e.target.value) || 0})}
-              suffix="%"
-            />
-            <InputField
-              label="Employees affected per incident"
-              value={trust.employeesAffected}
-              onChange={(e) => setTrust({...trust, employeesAffected: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Weeks to recover trust"
-              value={trust.weeksToRecover}
-              onChange={(e) => setTrust({...trust, weeksToRecover: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Average employee hourly wage"
-              value={trust.avgWage}
-              onChange={(e) => setTrust({...trust, avgWage: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-          </CostCard>
-
-          {/* Time Drain */}
-          <CostCard icon={Clock} title="Time Drain" amount={timeDrainCost} color="#e2c451">
-            <p className="text-sm mb-4" style={{ color: '#0e2c56', opacity: 0.8 }}>
-              Unclear priorities, last-minute changes, redundant approvals, and decision bottlenecks steal productive time.
-            </p>
-            <InputField
-              label="Major time drains per week"
-              value={timeDrain.drainsPerWeek}
-              onChange={(e) => setTimeDrain({...timeDrain, drainsPerWeek: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Hours lost per drain"
-              value={timeDrain.hoursPerDrain}
-              onChange={(e) => setTimeDrain({...timeDrain, hoursPerDrain: parseFloat(e.target.value) || 0})}
-              suffix="hrs"
-            />
-            <InputField
-              label="People impacted per drain"
-              value={timeDrain.peopleImpacted}
-              onChange={(e) => setTimeDrain({...timeDrain, peopleImpacted: parseFloat(e.target.value) || 0})}
-            />
-            <InputField
-              label="Average hourly rate"
-              value={timeDrain.avgRate}
-              onChange={(e) => setTimeDrain({...timeDrain, avgRate: parseFloat(e.target.value) || 0})}
-              prefix="$"
-            />
-          </CostCard>
-        </div>
-
-        {/* Total Cost Display */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border-4" 
-             style={{ borderColor: '#0e2c56' }}>
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold mb-3" style={{ color: '#0e2c56' }}>
-              Annual Cost of Leadership Leaks
-            </h2>
-            <div className="text-6xl font-bold mb-2" style={{ 
-              color: '#ff6d7b',
-              fontFamily: '"Inter", system-ui, sans-serif',
-              textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
-            }}>
-              {formatCurrency(totalCost)}
-            </div>
-            <p className="text-base max-w-2xl mx-auto" style={{ color: '#0e2c56', opacity: 0.75 }}>
-              Every dollar lost here could have fueled growth, innovation, and competitive advantage.
-            </p>
-          </div>
-
-          {/* Breakdown */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-3 pt-6 border-t-2" style={{ borderColor: '#0e2c5620' }}>
-            <div className="text-center">
-              <div className="text-xs font-medium mb-1" style={{ color: '#0e2c56', opacity: 0.7 }}>Meeting Waste</div>
-              <div className="text-lg font-bold" style={{ color: '#00a6cb' }}>{formatCurrency(meetingCost)}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs font-medium mb-1" style={{ color: '#0e2c56', opacity: 0.7 }}>Turnover</div>
-              <div className="text-lg font-bold" style={{ color: '#ff6d7b' }}>{formatCurrency(turnoverCost)}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs font-medium mb-1" style={{ color: '#0e2c56', opacity: 0.7 }}>Communication</div>
-              <div className="text-lg font-bold" style={{ color: '#e2c451' }}>{formatCurrency(commCost)}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs font-medium mb-1" style={{ color: '#0e2c56', opacity: 0.7 }}>Opportunities</div>
-              <div className="text-lg font-bold" style={{ color: '#00a6cb' }}>{formatCurrency(opportunityCost)}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs font-medium mb-1" style={{ color: '#0e2c56', opacity: 0.7 }}>Trust Erosion</div>
-              <div className="text-lg font-bold" style={{ color: '#ff6d7b' }}>{formatCurrency(trustCost)}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-xs font-medium mb-1" style={{ color: '#0e2c56', opacity: 0.7 }}>Time Drain</div>
-              <div className="text-lg font-bold" style={{ color: '#e2c451' }}>{formatCurrency(timeDrainCost)}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+</body>
+</html>
