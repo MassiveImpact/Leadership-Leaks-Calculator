@@ -15,8 +15,8 @@ body {
 }
 
 .container {
-  max-width: 1100px;
-  margin: auto;
+  max-width:1100px;
+  margin:auto;
 }
 
 h1 {
@@ -45,12 +45,6 @@ p.lead {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:0.5rem;
-}
-
-.section p {
-  font-size:0.9rem;
-  opacity:0.8;
 }
 
 .input-grid {
@@ -60,9 +54,9 @@ p.lead {
   margin-top:1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width:768px){
   .input-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
@@ -79,9 +73,7 @@ input {
 }
 
 .subtotal {
-  text-align:right;
   font-weight:bold;
-  margin-top:0.75rem;
 }
 
 button {
@@ -105,11 +97,6 @@ button {
   box-shadow:0 6px 22px rgba(0,0,0,0.15);
 }
 
-.total h2 {
-  font-size:2rem;
-  margin-bottom:0.5rem;
-}
-
 .total .amount {
   font-size:3.5rem;
   font-weight:bold;
@@ -124,79 +111,74 @@ button {
 <h1>Leadership Leaks™ Calculator</h1>
 <p class="lead">
 Hidden leadership gaps silently drain time, trust, and revenue.  
-This calculator reveals the real annual cost of those leaks.
+This calculator reveals the real costs of those “soft skills” leaks.  
+Enter your best estimates below, then calculate the impact.
 </p>
 
 <!-- MEETINGS -->
 <div class="section" style="border-color:#00a6cb;">
-<h3>Meeting Inefficiency <span id="meetingsSubtotal">$0</span></h3>
-<p>Unclear agendas, decision paralysis, and follow-ups that shouldn’t exist.</p>
+<h3>Meeting Inefficiency <span class="subtotal" id="meetingsSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Meetings per week<input id="m_pw" type="number" value="0"></label>
-<label>Hours wasted per meeting<input id="m_hw" type="number" step="0.1" value="0"></label>
-<label>Leader hourly cost ($)<input id="m_lc" type="number" value="0"></label>
-<label>Number of leaders<input id="m_nl" type="number" value="0"></label>
-<label>Team hourly cost ($)<input id="m_tc" type="number" value="0"></label>
-<label>Team members present<input id="m_nt" type="number" value="0"></label>
+<label>Meetings per week<input oninput="updateSubtotals()" id="m_pw" type="number"></label>
+<label>Hours wasted per meeting<input oninput="updateSubtotals()" id="m_hw" type="number" step="0.1"></label>
+<label>Leader hourly cost ($)<input oninput="updateSubtotals()" id="m_lc" type="number"></label>
+<label>Number of leaders<input oninput="updateSubtotals()" id="m_nl" type="number"></label>
+<label>Team hourly cost ($)<input oninput="updateSubtotals()" id="m_tc" type="number"></label>
+<label>Team members present<input oninput="updateSubtotals()" id="m_nt" type="number"></label>
 </div>
 </div>
 
 <!-- TURNOVER -->
 <div class="section" style="border-color:#ff6d7b;">
-<h3>Turnover Costs <span id="turnoverSubtotal">$0</span></h3>
-<p>People don’t quit jobs — they quit leadership.</p>
+<h3>Turnover Costs <span class="subtotal" id="turnoverSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Employees lost annually<input id="t_el" type="number" value="0"></label>
-<label>Replacement cost per employee ($)<input id="t_rc" type="number" value="0"></label>
+<label>Employees lost annually<input oninput="updateSubtotals()" id="t_el" type="number"></label>
+<label>Replacement cost per employee ($)<input oninput="updateSubtotals()" id="t_rc" type="number"></label>
 </div>
 </div>
 
 <!-- COMMUNICATION -->
 <div class="section" style="border-color:#e2c451;">
-<h3>Communication Breakdowns <span id="commSubtotal">$0</span></h3>
-<p>Rework, confusion, duplicate effort, and emergency alignment.</p>
+<h3>Communication Breakdowns <span class="subtotal" id="commSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Miscommunications per week<input id="c_pw" type="number" value="0"></label>
-<label>Cost per incident ($)<input id="c_cp" type="number" value="0"></label>
+<label>Miscommunications per week<input oninput="updateSubtotals()" id="c_pw" type="number"></label>
+<label>Cost per incident ($)<input oninput="updateSubtotals()" id="c_cp" type="number"></label>
 </div>
 </div>
 
 <!-- OPPORTUNITIES -->
 <div class="section" style="border-color:#00a6cb;">
-<h3>Missed Opportunities <span id="oppSubtotal">$0</span></h3>
-<p>Delayed decisions and overlooked ideas cost real money.</p>
+<h3>Missed Opportunities <span class="subtotal" id="oppSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Missed opportunities per week<input id="o_pw" type="number" value="0"></label>
-<label>Revenue per opportunity ($)<input id="o_rp" type="number" value="0"></label>
+<label>Missed opportunities per week<input oninput="updateSubtotals()" id="o_pw" type="number"></label>
+<label>Revenue per opportunity ($)<input oninput="updateSubtotals()" id="o_rp" type="number"></label>
 </div>
 </div>
 
 <!-- TRUST -->
 <div class="section" style="border-color:#ff6d7b;">
-<h3>Trust Erosion <span id="trustSubtotal">$0</span></h3>
-<p>Broken trust slows everything.</p>
+<h3>Trust Erosion <span class="subtotal" id="trustSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Incidents per month<input id="tr_im" type="number" value="0"></label>
-<label>Productivity loss (%)<input id="tr_pl" type="number" value="0"></label>
-<label>Employees affected<input id="tr_ea" type="number" value="0"></label>
-<label>Weeks to recover<input id="tr_wr" type="number" value="0"></label>
-<label>Avg hourly wage ($)<input id="tr_aw" type="number" value="0"></label>
+<label>Incidents per month<input oninput="updateSubtotals()" id="tr_im" type="number"></label>
+<label>Productivity loss (%)<input oninput="updateSubtotals()" id="tr_pl" type="number"></label>
+<label>Employees affected<input oninput="updateSubtotals()" id="tr_ea" type="number"></label>
+<label>Weeks to recover<input oninput="updateSubtotals()" id="tr_wr" type="number"></label>
+<label>Avg hourly wage ($)<input oninput="updateSubtotals()" id="tr_aw" type="number"></label>
 </div>
 </div>
 
 <!-- TIME -->
 <div class="section" style="border-color:#e2c451;">
-<h3>Time Drain <span id="timeSubtotal">$0</span></h3>
-<p>Decision bottlenecks, unclear priorities, last-minute changes.</p>
+<h3>Time Drain <span class="subtotal" id="timeSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Major drains per week<input id="ti_pw" type="number" value="0"></label>
-<label>Hours lost per drain<input id="ti_hw" type="number" value="0"></label>
-<label>People impacted<input id="ti_pi" type="number" value="0"></label>
-<label>Avg hourly rate ($)<input id="ti_ar" type="number" value="0"></label>
+<label>Major drains per week<input oninput="updateSubtotals()" id="ti_pw" type="number"></label>
+<label>Hours lost per drain<input oninput="updateSubtotals()" id="ti_hw" type="number"></label>
+<label>People impacted<input oninput="updateSubtotals()" id="ti_pi" type="number"></label>
+<label>Avg hourly rate ($)<input oninput="updateSubtotals()" id="ti_ar" type="number"></label>
 </div>
 </div>
 
-<button onclick="calculate()">Calculate</button>
+<button onclick="calculateTotal()">Calculate</button>
 
 <div class="total">
 <h2>Annual Cost of Leadership Leaks</h2>
@@ -206,32 +188,36 @@ This calculator reveals the real annual cost of those leaks.
 </div>
 
 <script>
-function num(id){ return parseFloat(document.getElementById(id).value)||0 }
-function money(v){ return "$" + Math.round(v).toLocaleString() }
+function n(id){ return parseFloat(document.getElementById(id).value)||0 }
+function $$(v){ return "$" + Math.round(v).toLocaleString() }
 
-function calculate(){
-  const meetings =
-    num("m_pw")*52*num("m_hw")*
-    (num("m_lc")*num("m_nl")+num("m_tc")*num("m_nt"));
+function calcMeetings(){
+  return n("m_pw")*52*n("m_hw")*(n("m_lc")*n("m_nl")+n("m_tc")*n("m_nt"));
+}
+function calcTurnover(){ return n("t_el")*n("t_rc"); }
+function calcComm(){ return n("c_pw")*52*n("c_cp"); }
+function calcOpp(){ return n("o_pw")*52*n("o_rp"); }
+function calcTrust(){
+  return n("tr_im")*12*(n("tr_pl")/100)*n("tr_ea")*n("tr_wr")*40*n("tr_aw");
+}
+function calcTime(){
+  return n("ti_pw")*52*n("ti_hw")*n("ti_pi")*n("ti_ar");
+}
 
-  const turnover = num("t_el")*num("t_rc");
-  const comm = num("c_pw")*52*num("c_cp");
-  const opp = num("o_pw")*52*num("o_rp");
-  const trust =
-    num("tr_im")*12*(num("tr_pl")/100)*num("tr_ea")*
-    num("tr_wr")*40*num("tr_aw");
-  const time =
-    num("ti_pw")*52*num("ti_hw")*num("ti_pi")*num("ti_ar");
+function updateSubtotals(){
+  document.getElementById("meetingsSubtotal").innerText = $$(calcMeetings());
+  document.getElementById("turnoverSubtotal").innerText = $$(calcTurnover());
+  document.getElementById("commSubtotal").innerText = $$(calcComm());
+  document.getElementById("oppSubtotal").innerText = $$(calcOpp());
+  document.getElementById("trustSubtotal").innerText = $$(calcTrust());
+  document.getElementById("timeSubtotal").innerText = $$(calcTime());
+}
 
-  document.getElementById("meetingsSubtotal").innerText = money(meetings);
-  document.getElementById("turnoverSubtotal").innerText = money(turnover);
-  document.getElementById("commSubtotal").innerText = money(comm);
-  document.getElementById("oppSubtotal").innerText = money(opp);
-  document.getElementById("trustSubtotal").innerText = money(trust);
-  document.getElementById("timeSubtotal").innerText = money(time);
-
-  document.getElementById("grandTotal").innerText =
-    money(meetings+turnover+comm+opp+trust+time);
+function calculateTotal(){
+  const total =
+    calcMeetings()+calcTurnover()+calcComm()+
+    calcOpp()+calcTrust()+calcTime();
+  document.getElementById("grandTotal").innerText = $$(total);
 }
 </script>
 
