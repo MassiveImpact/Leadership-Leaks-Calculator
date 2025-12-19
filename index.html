@@ -1,152 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leadership Leaks Calculator</title>
-  <style>
-    body {
-      font-family: "Inter", system-ui, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      margin: 0;
-      padding: 2rem;
-      color: #0e2c56;
-    }
-    h1, h2, h3 { margin: 0 0 0.5rem 0; }
-    .container { max-width: 1000px; margin: 0 auto; }
-    .section { background: white; border-radius: 12px; padding: 1rem 2rem; margin-bottom: 1.5rem; border-left: 6px solid; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .section h3 { margin-bottom: 0.5rem; }
-    .section p { margin-bottom: 0.5rem; font-size: 0.9rem; opacity: 0.8; }
-    label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
-    input[type=number] { width: 100%; padding: 0.4rem; margin-top: 0.2rem; border: 2px solid #00a6cb; border-radius: 6px; }
-    .total { background: white; border-radius: 16px; padding: 1.5rem 2rem; border: 4px solid #0e2c56; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom:2rem; }
-    .total span { font-size: 2.5rem; color: #ff6d7b; font-weight: bold; display:block; margin-top:0.5rem; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leadership Leaks™ Calculator</title>
+
+<style>
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: linear-gradient(135deg,#f5f7fa,#c3cfe2);
+  margin:0;
+  padding:1.5rem;
+  color:#0e2c56;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+h1 {
+  text-align:center;
+  font-size:2.8rem;
+  margin-bottom:0.5rem;
+}
+
+p.lead {
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 2rem;
+  opacity:0.85;
+}
+
+.section {
+  background:white;
+  border-radius:14px;
+  padding:1.5rem 2rem;
+  margin-bottom:1.5rem;
+  border-left:6px solid;
+  box-shadow:0 4px 14px rgba(0,0,0,0.08);
+}
+
+.section h3 {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:0.5rem;
+}
+
+.section p {
+  font-size:0.9rem;
+  opacity:0.8;
+}
+
+.input-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+  margin-top:1rem;
+}
+
+@media (min-width: 768px) {
+  .input-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+label {
+  font-size:0.85rem;
+}
+
+input {
+  width:100%;
+  padding:0.45rem;
+  margin-top:0.25rem;
+  border:2px solid #00a6cb;
+  border-radius:6px;
+}
+
+.subtotal {
+  text-align:right;
+  font-weight:bold;
+  margin-top:0.75rem;
+}
+
+button {
+  display:block;
+  margin:2rem auto;
+  padding:0.8rem 2rem;
+  font-size:1rem;
+  background:#00a6cb;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.total {
+  background:white;
+  border-radius:18px;
+  padding:2rem;
+  border:4px solid #0e2c56;
+  text-align:center;
+  box-shadow:0 6px 22px rgba(0,0,0,0.15);
+}
+
+.total h2 {
+  font-size:2rem;
+  margin-bottom:0.5rem;
+}
+
+.total .amount {
+  font-size:3.5rem;
+  font-weight:bold;
+  color:#ff6d7b;
+}
+</style>
 </head>
+
 <body>
-
 <div class="container">
-  <h1 style="text-align:center; margin-bottom:1rem;">Leadership Leaks™ Calculator</h1>
-  <p style="text-align:center; max-width:700px; margin:0 auto 2rem auto; opacity:0.85;">
-    Time and trust are your organization's most valuable currencies. Leadership leaks are hidden drains with measurable costs that compound daily. The question is not whether your organization has these leaks, but how much they are costing you right now.
-  </p>
 
-  <!-- Meeting Inefficiency -->
-  <div class="section" style="border-left-color:#00a6cb;">
-    <h3>Meeting Inefficiency</h3>
-    <p>Unclear agendas, off-topic discussions, decision paralysis, and redundant follow-ups drain resources.</p>
-    <label>Meetings per week: <input type="number" id="meetingsPerWeek" value="0" step="1"></label>
-    <label>Hours wasted per meeting: <input type="number" id="hoursWasted" value="0" step="0.1"></label>
-    <label>Leader hourly cost: $<input type="number" id="leaderCost" value="0" step="1"></label>
-    <label>Number of leaders: <input type="number" id="numLeaders" value="0" step="1"></label>
-    <label>Team member hourly cost: $<input type="number" id="teamMemberCost" value="0" step="1"></label>
-    <label>Team members per meeting: <input type="number" id="numTeamMembers" value="0" step="1"></label>
-  </div>
+<h1>Leadership Leaks™ Calculator</h1>
+<p class="lead">
+Hidden leadership gaps silently drain time, trust, and revenue.  
+This calculator reveals the real annual cost of those leaks.
+</p>
 
-  <!-- Turnover Costs -->
-  <div class="section" style="border-left-color:#ff6d7b;">
-    <h3>Turnover Costs</h3>
-    <p>People do not quit jobs, they quit managers. Poor leadership creates toxic cultures and burnout.</p>
-    <label>Employees lost annually: <input type="number" id="employeesLost" value="0" step="1"></label>
-    <label>Cost to replace one employee: $<input type="number" id="replacementCost" value="0" step="1"></label>
-  </div>
+<!-- MEETINGS -->
+<div class="section" style="border-color:#00a6cb;">
+<h3>Meeting Inefficiency <span id="meetingsSubtotal">$0</span></h3>
+<p>Unclear agendas, decision paralysis, and follow-ups that shouldn’t exist.</p>
+<div class="input-grid">
+<label>Meetings per week<input id="m_pw" type="number" value="0"></label>
+<label>Hours wasted per meeting<input id="m_hw" type="number" step="0.1" value="0"></label>
+<label>Leader hourly cost ($)<input id="m_lc" type="number" value="0"></label>
+<label>Number of leaders<input id="m_nl" type="number" value="0"></label>
+<label>Team hourly cost ($)<input id="m_tc" type="number" value="0"></label>
+<label>Team members present<input id="m_nt" type="number" value="0"></label>
+</div>
+</div>
 
-  <!-- Communication Breakdowns -->
-  <div class="section" style="border-left-color:#e2c451;">
-    <h3>Communication Breakdowns</h3>
-    <p>Unclear instructions, rework, duplicate efforts, and emergency "alignment" meetings add up fast.</p>
-    <label>Miscommunications per week: <input type="number" id="miscommunicationsPerWeek" value="0" step="1"></label>
-    <label>Cost per miscommunication: $<input type="number" id="costPerMiscommunication" value="0" step="1"></label>
-  </div>
+<!-- TURNOVER -->
+<div class="section" style="border-color:#ff6d7b;">
+<h3>Turnover Costs <span id="turnoverSubtotal">$0</span></h3>
+<p>People don’t quit jobs — they quit leadership.</p>
+<div class="input-grid">
+<label>Employees lost annually<input id="t_el" type="number" value="0"></label>
+<label>Replacement cost per employee ($)<input id="t_rc" type="number" value="0"></label>
+</div>
+</div>
 
-  <!-- Missed Opportunities -->
-  <div class="section" style="border-left-color:#00a6cb;">
-    <h3>Missed Opportunities</h3>
-    <p>Strategic partnerships ignored, innovations dismissed, and market windows missed due to poor leadership.</p>
-    <label>Missed opportunities per week: <input type="number" id="missedOpportunities" value="0" step="1"></label>
-    <label>Revenue per missed opportunity: $<input type="number" id="revenuePerOpportunity" value="0" step="1"></label>
-  </div>
+<!-- COMMUNICATION -->
+<div class="section" style="border-color:#e2c451;">
+<h3>Communication Breakdowns <span id="commSubtotal">$0</span></h3>
+<p>Rework, confusion, duplicate effort, and emergency alignment.</p>
+<div class="input-grid">
+<label>Miscommunications per week<input id="c_pw" type="number" value="0"></label>
+<label>Cost per incident ($)<input id="c_cp" type="number" value="0"></label>
+</div>
+</div>
 
-  <!-- Trust Erosion -->
-  <div class="section" style="border-left-color:#ff6d7b;">
-    <h3>Trust Erosion</h3>
-    <p>Broken promises, favoritism, and micromanaging cause people to second-guess, withhold ideas, and cover their backs.</p>
-    <label>Trust-breaking incidents per month: <input type="number" id="trustIncidents" value="0" step="1"></label>
-    <label>Productivity loss per incident (%): <input type="number" id="productivityLoss" value="0" step="1"></label>
-    <label>Employees affected per incident: <input type="number" id="employeesAffected" value="0" step="1"></label>
-    <label>Weeks to recover trust: <input type="number" id="weeksToRecover" value="0" step="1"></label>
-    <label>Average employee hourly wage: $<input type="number" id="avgWage" value="0" step="1"></label>
-  </div>
+<!-- OPPORTUNITIES -->
+<div class="section" style="border-color:#00a6cb;">
+<h3>Missed Opportunities <span id="oppSubtotal">$0</span></h3>
+<p>Delayed decisions and overlooked ideas cost real money.</p>
+<div class="input-grid">
+<label>Missed opportunities per week<input id="o_pw" type="number" value="0"></label>
+<label>Revenue per opportunity ($)<input id="o_rp" type="number" value="0"></label>
+</div>
+</div>
 
-  <!-- Time Drain -->
-  <div class="section" style="border-left-color:#e2c451;">
-    <h3>Time Drain</h3>
-    <p>Unclear priorities, last-minute changes, redundant approvals, and decision bottlenecks steal productive time.</p>
-    <label>Major time drains per week: <input type="number" id="drainsPerWeek" value="0" step="1"></label>
-    <label>Hours lost per drain: <input type="number" id="hoursPerDrain" value="0" step="0.1"></label>
-    <label>People impacted per drain: <input type="number" id="peopleImpacted" value="0" step="1"></label>
-    <label>Average hourly rate: $<input type="number" id="avgRate" value="0" step="1"></label>
-  </div>
+<!-- TRUST -->
+<div class="section" style="border-color:#ff6d7b;">
+<h3>Trust Erosion <span id="trustSubtotal">$0</span></h3>
+<p>Broken trust slows everything.</p>
+<div class="input-grid">
+<label>Incidents per month<input id="tr_im" type="number" value="0"></label>
+<label>Productivity loss (%)<input id="tr_pl" type="number" value="0"></label>
+<label>Employees affected<input id="tr_ea" type="number" value="0"></label>
+<label>Weeks to recover<input id="tr_wr" type="number" value="0"></label>
+<label>Avg hourly wage ($)<input id="tr_aw" type="number" value="0"></label>
+</div>
+</div>
 
-  <!-- Calculate Button -->
-  <div style="text-align:center; margin-bottom:2rem;">
-    <button onclick="calculateTotal()" style="padding:0.7rem 1.5rem; font-size:1rem; background:#00a6cb; color:white; border:none; border-radius:6px; cursor:pointer;">
-      Calculate Total Cost
-    </button>
-  </div>
+<!-- TIME -->
+<div class="section" style="border-color:#e2c451;">
+<h3>Time Drain <span id="timeSubtotal">$0</span></h3>
+<p>Decision bottlenecks, unclear priorities, last-minute changes.</p>
+<div class="input-grid">
+<label>Major drains per week<input id="ti_pw" type="number" value="0"></label>
+<label>Hours lost per drain<input id="ti_hw" type="number" value="0"></label>
+<label>People impacted<input id="ti_pi" type="number" value="0"></label>
+<label>Avg hourly rate ($)<input id="ti_ar" type="number" value="0"></label>
+</div>
+</div>
 
-  <!-- Total Cost -->
-  <div class="total">
-    <h2>Annual Cost of Leadership Leaks</h2>
-    <span id="totalCost">$0</span>
-  </div>
+<button onclick="calculate()">Calculate</button>
+
+<div class="total">
+<h2>Annual Cost of Leadership Leaks</h2>
+<div class="amount" id="grandTotal">$0</div>
+</div>
+
 </div>
 
 <script>
-  function calculateTotal() {
-    // Meeting
-    const meetingsPerWeek = parseFloat(document.getElementById('meetingsPerWeek').value) || 0;
-    const hoursWasted = parseFloat(document.getElementById('hoursWasted').value) || 0;
-    const leaderCost = parseFloat(document.getElementById('leaderCost').value) || 0;
-    const numLeaders = parseFloat(document.getElementById('numLeaders').value) || 0;
-    const teamMemberCost = parseFloat(document.getElementById('teamMemberCost').value) || 0;
-    const numTeamMembers = parseFloat(document.getElementById('numTeamMembers').value) || 0;
-    const meetingCost = meetingsPerWeek * 52 * hoursWasted * (leaderCost * numLeaders + teamMemberCost * numTeamMembers);
+function num(id){ return parseFloat(document.getElementById(id).value)||0 }
+function money(v){ return "$" + Math.round(v).toLocaleString() }
 
-    // Turnover
-    const employeesLost = parseFloat(document.getElementById('employeesLost').value) || 0;
-    const replacementCost = parseFloat(document.getElementById('replacementCost').value) || 0;
-    const turnoverCost = employeesLost * replacementCost;
+function calculate(){
+  const meetings =
+    num("m_pw")*52*num("m_hw")*
+    (num("m_lc")*num("m_nl")+num("m_tc")*num("m_nt"));
 
-    // Communication
-    const misPerWeek = parseFloat(document.getElementById('miscommunicationsPerWeek').value) || 0;
-    const costPerMis = parseFloat(document.getElementById('costPerMiscommunication').value) || 0;
-    const commCost = misPerWeek * 52 * costPerMis;
+  const turnover = num("t_el")*num("t_rc");
+  const comm = num("c_pw")*52*num("c_cp");
+  const opp = num("o_pw")*52*num("o_rp");
+  const trust =
+    num("tr_im")*12*(num("tr_pl")/100)*num("tr_ea")*
+    num("tr_wr")*40*num("tr_aw");
+  const time =
+    num("ti_pw")*52*num("ti_hw")*num("ti_pi")*num("ti_ar");
 
-    // Opportunities
-    const oppPerWeek = parseFloat(document.getElementById('missedOpportunities').value) || 0;
-    const revenuePerOpp = parseFloat(document.getElementById('revenuePerOpportunity').value) || 0;
-    const opportunityCost = oppPerWeek * 52 * revenuePerOpp;
+  document.getElementById("meetingsSubtotal").innerText = money(meetings);
+  document.getElementById("turnoverSubtotal").innerText = money(turnover);
+  document.getElementById("commSubtotal").innerText = money(comm);
+  document.getElementById("oppSubtotal").innerText = money(opp);
+  document.getElementById("trustSubtotal").innerText = money(trust);
+  document.getElementById("timeSubtotal").innerText = money(time);
 
-    // Trust
-    const incidents = parseFloat(document.getElementById('trustIncidents').value) || 0;
-    const productivityLoss = parseFloat(document.getElementById('productivityLoss').value) || 0;
-    const employeesAffected = parseFloat(document.getElementById('employeesAffected').value) || 0;
-    const weeksToRecover = parseFloat(document.getElementById('weeksToRecover').value) || 0;
-    const avgWage = parseFloat(document.getElementById('avgWage').value) || 0;
-    const trustCost = incidents * 12 * (productivityLoss/100) * employeesAffected * weeksToRecover * 40 * avgWage;
-
-    // Time Drain
-    const drainsPerWeek = parseFloat(document.getElementById('drainsPerWeek').value) || 0;
-    const hoursPerDrain = parseFloat(document.getElementById('hoursPerDrain').value) || 0;
-    const peopleImpacted = parseFloat(document.getElementById('peopleImpacted').value) || 0;
-    const avgRate = parseFloat(document.getElementById('avgRate').value) || 0;
-    const timeDrainCost = drainsPerWeek * 52 * hoursPerDrain * peopleImpacted * avgRate;
-
-    const totalCost = meetingCost + turnoverCost + commCost + opportunityCost + trustCost + timeDrainCost;
-
-    document.getElementById('totalCost').innerText = totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits:0 });
-  }
+  document.getElementById("grandTotal").innerText =
+    money(meetings+turnover+comm+opp+trust+time);
+}
 </script>
 
 </body>
