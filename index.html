@@ -6,8 +6,10 @@
 <title>Leadership Leaks™ Calculator</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+
 body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   background: linear-gradient(135deg,#f5f7fa,#c3cfe2);
   margin:0;
   padding:1.5rem;
@@ -70,22 +72,25 @@ input {
   margin-top:0.25rem;
   border:2px solid #00a6cb;
   border-radius:6px;
+  font-family:'Fira Sans', sans-serif;
 }
 
 .subtotal {
   font-weight:bold;
 }
 
-button {
+button.calculate {
   display:block;
   margin:2rem auto;
   padding:0.8rem 2rem;
   font-size:1rem;
-  background:#00a6cb;
+  background:#ff6d7b;
   color:white;
   border:none;
   border-radius:8px;
   cursor:pointer;
+  font-family:'Fira Sans', sans-serif;
+  font-weight:bold;
 }
 
 .total {
@@ -95,6 +100,7 @@ button {
   border:4px solid #0e2c56;
   text-align:center;
   box-shadow:0 6px 22px rgba(0,0,0,0.15);
+  font-family:'Fira Sans', sans-serif;
 }
 
 .total .amount {
@@ -191,7 +197,7 @@ Enter your best estimates below, then calculate the impact to reveal the real co
 </div>
 </div>
 
-<button onclick="calculateTotal()">Calculate</button>
+<button class="calculate" onclick="calculateTotal()">Calculate</button>
 
 <div class="total">
 <h2>Annual Cost of Leadership Leaks</h2>
