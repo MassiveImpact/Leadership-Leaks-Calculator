@@ -6,10 +6,8 @@
 <title>Leadership Leaks™ Calculator</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
-
 body {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Fira Sans', Inter, system-ui, sans-serif;
   background: linear-gradient(135deg,#f5f7fa,#c3cfe2);
   margin:0;
   padding:1.5rem;
@@ -72,25 +70,24 @@ input {
   margin-top:0.25rem;
   border:2px solid #00a6cb;
   border-radius:6px;
-  font-family:'Fira Sans', sans-serif;
 }
 
 .subtotal {
   font-weight:bold;
 }
 
-button.calculate {
+button {
   display:block;
   margin:2rem auto;
   padding:0.8rem 2rem;
   font-size:1rem;
+  font-weight:bold;
   background:#ff6d7b;
   color:white;
   border:none;
   border-radius:8px;
   cursor:pointer;
-  font-family:'Fira Sans', sans-serif;
-  font-weight:bold;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 .total {
@@ -100,7 +97,6 @@ button.calculate {
   border:4px solid #0e2c56;
   text-align:center;
   box-shadow:0 6px 22px rgba(0,0,0,0.15);
-  font-family:'Fira Sans', sans-serif;
 }
 
 .total .amount {
@@ -109,17 +105,16 @@ button.calculate {
   color:#ff6d7b;
 }
 
-/* CTA Button Styles */
 .cta-button {
-  margin-top:12px;
   display:inline-block;
+  margin-top:20px;
+  padding:14px 28px;
   background-color:#009ec4;
   color:white;
-  font-family:'Fira Sans', sans-serif;
-  font-weight:bold;
   text-decoration:none;
-  padding:14px 28px;
-  border-radius:6px;
+  border-radius:8px;
+  font-weight:bold;
+  font-family: 'Fira Sans', sans-serif;
   font-size:1.1rem;
 }
 </style>
@@ -130,8 +125,7 @@ button.calculate {
 
 <h1>Leadership Leaks™ Calculator</h1>
 <p class="lead">
-Hidden leadership gaps silently drain time, trust, and revenue.  
-Enter your best estimates below, then calculate the impact to reveal the real costs of those “soft skills” leaks.
+Hidden leadership gaps silently drain time, trust, and revenue. Enter your best estimates below, then calculate the impact to reveal the real costs of those “soft skills” leaks.
 </p>
 
 <!-- MEETINGS -->
@@ -197,15 +191,18 @@ Enter your best estimates below, then calculate the impact to reveal the real co
 </div>
 </div>
 
-<button class="calculate" onclick="calculateTotal()">Calculate</button>
+<button onclick="calculateTotal()">Calculate</button>
 
 <div class="total">
 <h2>Annual Cost of Leadership Leaks</h2>
 <div class="amount" id="grandTotal">$0</div>
 
-<p style="margin-top:16px; font-size:1.1rem;">Ready to see how to plug these leadership leaks?</p>
+<p style="margin-top:20px; font-size:1.1rem; font-weight:bold;">
+Ready to see how to plug these leadership leaks?
+</p>
 
-<a href="https://cal.com/charityhaderlie/leadership-leaks" target="_blank" class="cta-button">
+<a href="https://cal.com/charityhaderlie/leadership-leaks?notes=Thank%20you%20for%20using%20the%20Leadership%20Leaks%E2%84%A2%20Calculator!%20In%20this%20session%2C%20we%E2%80%99ll%20explore%20where%20hidden%20gaps%20in%20your%20team%2C%20processes%2C%20or%20habits%20may%20be%20draining%20time%2C%20energy,%20and%20growth.%20Together,%20we%E2%80%99ll%20identify%20high-impact%20opportunities%20to%20plug%20these%20leaks%20and%20boost%20your%20leadership%20effectiveness.%0A%0AQuestions%20to%20prepare:%0A-%20Which%20areas%20of%20your%20leadership%20feel%20most%20draining%20right%20now?%0A-%20Where%20do%20decisions%20stall%20or%20get%20unnecessarily%20escalated?%0A-%20Which%20recurring%20team%20or%20process%20challenges%20frustrate%20you%20the%20most?" 
+target="_blank" class="cta-button">
 Book your Free Consult
 </a>
 
