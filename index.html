@@ -107,30 +107,6 @@ input:focus {
   color:#0f172a;
 }
 
-button {
-  display:block;
-  margin:2.5rem auto;
-  padding:1rem 3rem;
-  font-size:1.0625rem;
-  font-weight:600;
-  background:#1e3a8a;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-family: 'Inter', sans-serif;
-  transition: background 0.2s ease, transform 0.1s ease;
-}
-
-button:hover {
-  background:#1e40af;
-  transform:translateY(-1px);
-}
-
-button:active {
-  transform:translateY(0);
-}
-
 .total {
   background:white;
   border-radius:12px;
@@ -283,7 +259,7 @@ This calculator translates untracked inefficiencies into real financial impact.
 <div class="section" style="border-color:#ec4899;">
 <h3>Hidden Personal Cost <span class="subtotal" id="personalSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Hours per week stressed, distracted, or unfocused<input oninput="updateTotals()" id="p_hw" type="number" step="0.5"></label>
+<label>Hours per week you feel overwhelmed, distracted, or unfocused<input oninput="updateTotals()" id="p_hw" type="number" step="0.5"></label>
 <label>Your approximate hourly value ($)<input oninput="updateTotals()" id="p_hv" type="number"></label>
 </div>
 <p style="margin-top:1rem; font-size:0.875rem; color:#64748b; font-style:italic;">
@@ -321,7 +297,7 @@ function calcMeetings(){ return n("m_pw")*52*n("m_hw")*(n("m_lc")*n("m_nl")+n("m
 function calcTurnover(){ return n("t_el")*n("t_rc"); }
 function calcComm(){ return n("c_pw")*52*n("c_cp"); }
 function calcOpp(){ return n("o_pw")*52*n("o_rp"); }
-function calcTrust(){ return n("tr_im")*12*(n("tr_pl")/100)*n("tr_ea")*n("tr_wr")*n("tr_aw"); }
+function calcTrust(){ return n("tr_im")*12*(n("tr_pl")/100)*n("tr_ea")*n("tr_wr")*40*n("tr_aw"); }
 function calcTime(){ return n("ti_pw")*52*n("ti_hw")*n("ti_pi")*n("ti_ar"); }
 function calcPersonal(){ return n("p_hw")*52*n("p_hv"); }
 
