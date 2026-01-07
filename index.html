@@ -213,19 +213,19 @@ button:active {
 
 <h1>The Hidden Cost Calculator</h1>
 <p class="lead">
-This calculator translates those untracked inefficiencies into real financial impact.
+This calculator translates untracked inefficiencies into real financial impact.
 </p>
 
 <!-- MEETINGS -->
 <div class="section" style="border-color:#3b82f6;">
 <h3>Meeting Inefficiency <span class="subtotal" id="meetingsSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Meetings per week<input oninput="updateSubtotals()" id="m_pw" type="number"></label>
-<label>Hours wasted per meeting<input oninput="updateSubtotals()" id="m_hw" type="number" step="0.1"></label>
-<label>Leader hourly cost ($)<input oninput="updateSubtotals()" id="m_lc" type="number"></label>
-<label>Number of leaders<input oninput="updateSubtotals()" id="m_nl" type="number"></label>
-<label>Team average wage ($)<input oninput="updateSubtotals()" id="m_tc" type="number"></label>
-<label>Team members present<input oninput="updateSubtotals()" id="m_nt" type="number"></label>
+<label>Meetings per week<input oninput="updateTotals()" id="m_pw" type="number"></label>
+<label>Hours wasted per meeting<input oninput="updateTotals()" id="m_hw" type="number" step="0.1"></label>
+<label>Leader hourly cost ($)<input oninput="updateTotals()" id="m_lc" type="number"></label>
+<label>Number of leaders<input oninput="updateTotals()" id="m_nl" type="number"></label>
+<label>Team average wage ($)<input oninput="updateTotals()" id="m_tc" type="number"></label>
+<label>Team members present<input oninput="updateTotals()" id="m_nt" type="number"></label>
 </div>
 </div>
 
@@ -233,8 +233,8 @@ This calculator translates those untracked inefficiencies into real financial im
 <div class="section" style="border-color:#dc2626;">
 <h3>Turnover Costs <span class="subtotal" id="turnoverSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Employees lost annually<input oninput="updateSubtotals()" id="t_el" type="number"></label>
-<label>Replacement cost per employee ($)<input oninput="updateSubtotals()" id="t_rc" type="number"></label>
+<label>Employees lost annually<input oninput="updateTotals()" id="t_el" type="number"></label>
+<label>Replacement cost per employee ($)<input oninput="updateTotals()" id="t_rc" type="number"></label>
 </div>
 </div>
 
@@ -242,8 +242,8 @@ This calculator translates those untracked inefficiencies into real financial im
 <div class="section" style="border-color:#f59e0b;">
 <h3>Communication Breakdowns <span class="subtotal" id="commSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Miscommunications per week<input oninput="updateSubtotals()" id="c_pw" type="number"></label>
-<label>Estimated cost per incident ($)<input oninput="updateSubtotals()" id="c_cp" type="number"></label>
+<label>Miscommunications per week<input oninput="updateTotals()" id="c_pw" type="number"></label>
+<label>Estimated cost per incident ($)<input oninput="updateTotals()" id="c_cp" type="number"></label>
 </div>
 </div>
 
@@ -251,8 +251,8 @@ This calculator translates those untracked inefficiencies into real financial im
 <div class="section" style="border-color:#10b981;">
 <h3>Missed Opportunities <span class="subtotal" id="oppSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Missed opportunities per week<input oninput="updateSubtotals()" id="o_pw" type="number"></label>
-<label>Estimated cost per incident ($)<input oninput="updateSubtotals()" id="o_rp" type="number"></label>
+<label>Missed opportunities per week<input oninput="updateTotals()" id="o_pw" type="number"></label>
+<label>Estimated cost per incident ($)<input oninput="updateTotals()" id="o_rp" type="number"></label>
 </div>
 </div>
 
@@ -260,11 +260,11 @@ This calculator translates those untracked inefficiencies into real financial im
 <div class="section" style="border-color:#8b5cf6;">
 <h3>Trust Erosion <span class="subtotal" id="trustSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Incidents per month<input oninput="updateSubtotals()" id="tr_im" type="number"></label>
-<label>Productivity loss (%)<input oninput="updateSubtotals()" id="tr_pl" type="number" min="0" max="100"></label>
-<label>Employees affected<input oninput="updateSubtotals()" id="tr_ea" type="number"></label>
-<label>Weeks to recover<input oninput="updateSubtotals()" id="tr_wr" type="number"></label>
-<label>Avg hourly wage ($)<input oninput="updateSubtotals()" id="tr_aw" type="number"></label>
+<label>Incidents per month<input oninput="updateTotals()" id="tr_im" type="number"></label>
+<label>Productivity loss (%)<input oninput="updateTotals()" id="tr_pl" type="number" min="0" max="100"></label>
+<label>Employees affected<input oninput="updateTotals()" id="tr_ea" type="number"></label>
+<label>Weeks to recover<input oninput="updateTotals()" id="tr_wr" type="number"></label>
+<label>Avg hourly wage ($)<input oninput="updateTotals()" id="tr_aw" type="number"></label>
 </div>
 </div>
 
@@ -272,14 +272,24 @@ This calculator translates those untracked inefficiencies into real financial im
 <div class="section" style="border-color:#06b6d4;">
 <h3>Time Drain <span class="subtotal" id="timeSubtotal">$0</span></h3>
 <div class="input-grid">
-<label>Times rework/repeating info occurs per week<input oninput="updateSubtotals()" id="ti_pw" type="number"></label>
-<label>Hours lost per occurrence<input oninput="updateSubtotals()" id="ti_hw" type="number"></label>
-<label>People impacted<input oninput="updateSubtotals()" id="ti_pi" type="number"></label>
-<label>Avg hourly rate ($)<input oninput="updateSubtotals()" id="ti_ar" type="number"></label>
+<label>Times rework/repeating info occurs per week<input oninput="updateTotals()" id="ti_pw" type="number"></label>
+<label>Hours lost per occurrence<input oninput="updateTotals()" id="ti_hw" type="number"></label>
+<label>People impacted<input oninput="updateTotals()" id="ti_pi" type="number"></label>
+<label>Avg hourly rate ($)<input oninput="updateTotals()" id="ti_ar" type="number"></label>
 </div>
 </div>
 
-<button onclick="calculateTotal()">Calculate Total</button>
+<!-- PERSONAL COST -->
+<div class="section" style="border-color:#ec4899;">
+<h3>Hidden Personal Cost <span class="subtotal" id="personalSubtotal">$0</span></h3>
+<div class="input-grid">
+<label>Hours per week stressed, distracted, or unfocused<input oninput="updateTotals()" id="p_hw" type="number" step="0.5"></label>
+<label>Your approximate hourly value ($)<input oninput="updateTotals()" id="p_hv" type="number"></label>
+</div>
+<p style="margin-top:1rem; font-size:0.875rem; color:#64748b; font-style:italic;">
+This is time you could be fully present with your team, making decisions, or enjoying life outside work.
+</p>
+</div>
 
 <div class="total">
 <h2>Estimated Cost of Inefficiencies</h2>
@@ -295,7 +305,7 @@ These costs quietly compound year after year. Reclaim the revenue and invest in 
 We're opening a small leadership cohort designed to help organizations reduce financial bleed caused by miscommunication, turnover, and inefficiency by strengthening how leaders think, communicate, and make decisions under pressure. To learn more:
 </p>
 
-<a href="https://www.charityhaderlie.com/wait" 
+<a href="https://stats.sender.net/forms/bDkAXq/view" 
 target="_blank" class="cta-button">
 Join Leadership Cohort Waitlist
 </a>
@@ -307,32 +317,26 @@ Join Leadership Cohort Waitlist
 function n(id){ return parseFloat(document.getElementById(id).value)||0 }
 function $$(v){ return "$" + Math.round(v).toLocaleString() }
 
-function calcMeetings(){
-  return n("m_pw")*52*n("m_hw")*(n("m_lc")*n("m_nl")+n("m_tc")*n("m_nt"));
-}
+function calcMeetings(){ return n("m_pw")*52*n("m_hw")*(n("m_lc")*n("m_nl")+n("m_tc")*n("m_nt")); }
 function calcTurnover(){ return n("t_el")*n("t_rc"); }
 function calcComm(){ return n("c_pw")*52*n("c_cp"); }
 function calcOpp(){ return n("o_pw")*52*n("o_rp"); }
-function calcTrust(){
-  return n("tr_im")*12*(n("tr_pl")/100)*n("tr_ea")*n("tr_wr")*40*n("tr_aw");
-}
-function calcTime(){
-  return n("ti_pw")*52*n("ti_hw")*n("ti_pi")*n("ti_ar");
-}
+function calcTrust(){ return n("tr_im")*12*(n("tr_pl")/100)*n("tr_ea")*n("tr_wr")*n("tr_aw"); }
+function calcTime(){ return n("ti_pw")*52*n("ti_hw")*n("ti_pi")*n("ti_ar"); }
+function calcPersonal(){ return n("p_hw")*52*n("p_hv"); }
 
-function updateSubtotals(){
+function updateTotals(){
   document.getElementById("meetingsSubtotal").innerText = $$(calcMeetings());
   document.getElementById("turnoverSubtotal").innerText = $$(calcTurnover());
   document.getElementById("commSubtotal").innerText = $$(calcComm());
   document.getElementById("oppSubtotal").innerText = $$(calcOpp());
   document.getElementById("trustSubtotal").innerText = $$(calcTrust());
   document.getElementById("timeSubtotal").innerText = $$(calcTime());
-}
-
-function calculateTotal(){
+  document.getElementById("personalSubtotal").innerText = $$(calcPersonal());
+  
   const total =
     calcMeetings()+calcTurnover()+calcComm()+
-    calcOpp()+calcTrust()+calcTime();
+    calcOpp()+calcTrust()+calcTime()+calcPersonal();
   document.getElementById("grandTotal").innerText = $$(total);
 }
 </script>
